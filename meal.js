@@ -3,15 +3,32 @@ const searchFood = () => {
     const SearchText = searchField.value;
     searchField.value = '';
     const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${SearchText}`;
-
-    fetch(url)
-        .then(res => res.json())
-        .then(data => displaySearchResult(data.meals))
+    //  if empty search
+    if (SearchText.length == '') {
+        const noResult = document.getElementById('no-result');
+        noResult.innerHTML = `
+        <h1>No result found!</h1>
+        `;
+    }
+    else {
+        fetch(url)
+            .then(res => res.json())
+            .then(data => displaySearchResult(data.meals))
+    }
 
 }
 
 const displaySearchResult = meals => {
     const searchResult = document.getElementById('search-result')
+    searchResult.textContent = '';
+
+    // Show if no result found
+    if (meals.length == 0) {
+        const noResult = document.getElementById('no-result');
+        noResult.innerHTML = `
+        <h1>No result found!</h1>
+        `;
+    }
     meals.forEach(meal => {
         // console.log(meal)
         const div = document.createElement('div');
@@ -39,6 +56,7 @@ const mealDetails = mealId => {
 
 const displayMealDetails = meal => {
     const singleMealDetails = document.getElementById('single-meal-details');
+    singleMealDetails.textContent = '';
     const div = document.createElement('div');
     div.classList.add('card');
     div.innerHTML = `
