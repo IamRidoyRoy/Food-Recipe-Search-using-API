@@ -22,15 +22,14 @@ const displaySearchResult = meals => {
     const searchResult = document.getElementById('search-result')
     searchResult.textContent = '';
 
-    // Show if no result found
-    if (meals.length == 0) {
-        const noResult = document.getElementById('no-result');
-        noResult.innerHTML = `
-        <h1>No result found!</h1>
-        `;
-    }
     meals.forEach(meal => {
-        // console.log(meal)
+        // Show if no result found
+        if (meal.length == 0) {
+            const noResult = document.getElementById('no-result');
+            noResult.innerHTML = `
+            <h1>No result found!</h1>
+            `;
+        }
         const div = document.createElement('div');
         div.classList.add('col');
         div.innerHTML = `
