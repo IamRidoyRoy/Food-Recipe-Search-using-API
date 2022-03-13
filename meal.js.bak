@@ -1,13 +1,3 @@
-const searchField = document.getElementById('searchField');
-const searchButton = document.getElementById('button-search');
-// Click enter by search 
-searchField.addEventListener('keypress', function (event) {
-    if (event.key === 'Enter') {
-        searchButton.click();
-    }
-})
-
-
 const searchFood = () => {
     const searchField = document.getElementById('searchField');
     const SearchText = searchField.value;
@@ -33,7 +23,7 @@ const displaySearchResult = meals => {
     searchResult.textContent = '';
 
     meals.forEach(meal => {
-
+		console.log(meal)
         // Show if no result found
         if (meal.length == 0) {
             const noResult = document.getElementById('no-result');
@@ -57,7 +47,6 @@ const displaySearchResult = meals => {
 }
 
 const mealDetails = mealId => {
-    console.log(mealId)
     const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`;
     fetch(url)
         .then(res => res.json())
